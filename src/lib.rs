@@ -76,3 +76,7 @@ pub fn shader_source(shader: Uint, source: &str) {
         sys::glShaderSource(shader, count as Sizei, strings.as_slice().as_ptr(), lengths.as_slice().as_ptr());
     }
 }
+
+pub fn compile_shader(shader: Uint) {
+    unsafe { sys::glCompileShader(shader) }
+}
