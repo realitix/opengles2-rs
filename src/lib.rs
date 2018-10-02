@@ -143,3 +143,7 @@ pub fn get_program_info_log(program: Uint) -> String {
 pub fn delete_program(program: Uint) {
     unsafe { sys::glDeleteProgram(program) }
 }
+
+pub fn get_attrib_location(program: Uint, name: &str) -> Int{
+    unsafe { sys::glGetAttribLocation(program, name.as_bytes().as_ptr() as *const i8) }
+} 
