@@ -80,3 +80,9 @@ pub fn shader_source(shader: Uint, source: &str) {
 pub fn compile_shader(shader: Uint) {
     unsafe { sys::glCompileShader(shader) }
 }
+
+pub fn get_shaderiv(shader: Uint, pname: Enum) -> Int {
+    let mut params = 0;
+    unsafe { sys::glGetShaderiv(shader, pname, &mut params) };
+    params
+}
