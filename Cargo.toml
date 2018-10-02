@@ -1,0 +1,13 @@
+[package]
+name = "opengles2-rs"
+version = "0.1.0"
+authors = ["Bevilacqua Jean-Sebastien <realitix@gmail.com>"]
+
+[lib]
+name = "opengles2"
+
+[dependencies]
+libc = "*"
+
+[build-dependencies]
+bindgen = "*"
