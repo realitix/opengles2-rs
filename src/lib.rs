@@ -139,3 +139,7 @@ pub fn get_program_info_log(program: Uint) -> String {
 
     result
 }
+
+pub fn delete_program(program: Uint) {
+    unsafe { sys::glDeleteProgram(program) }
+}
