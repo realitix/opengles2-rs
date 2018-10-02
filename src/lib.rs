@@ -108,3 +108,7 @@ pub fn get_shader_info_log(shader: Uint) -> String {
 pub fn delete_shader(shader: Uint) {
     unsafe { sys::glDeleteShader(shader) }
 }
+
+pub fn attach_shader(program: Uint, shader: Uint) {
+    unsafe { sys::glAttachShader(program, shader) }
+}
