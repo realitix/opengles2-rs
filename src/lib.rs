@@ -27,6 +27,8 @@ pub const RGBA: Enum = sys::GL_RGBA;
 pub const UNSIGNED_BYTE: Enum = sys::GL_UNSIGNED_BYTE;
 pub const VERTEX_SHADER: Enum = sys::GL_VERTEX_SHADER;
 pub const FRAGMENT_SHADER: Enum = sys::GL_FRAGMENT_SHADER;
+pub const COMPILE_STATUS: Enum = sys::GL_COMPILE_STATUS;
+pub const TRUE: Enum = sys::GL_TRUE;
 
 // Functions
 pub fn clear_color(red: Clampf, green: Clampf, blue: Clampf, alpha: Clampf) {
@@ -85,4 +87,20 @@ pub fn get_shaderiv(shader: Uint, pname: Enum) -> Int {
     let mut params = 0;
     unsafe { sys::glGetShaderiv(shader, pname, &mut params) };
     params
+}
+
+pub fn get_shader_info_log(shader: Uint) -> String {
+    let max_length = 2048;
+    let mut length = 0;
+    let mut infolog: Char = 0;
+    let result;
+
+    unsafe {
+        sys::glGetShaderInfoLog(shader, max_length, &mut length, &mut infolog);
+
+        let mut ptr = infolog as u8;
+        result = String::from_raw_parts(&mut ptr, length as usize, length as usize);
+    }
+
+    result
 }
