@@ -112,3 +112,7 @@ pub fn delete_shader(shader: Uint) {
 pub fn attach_shader(program: Uint, shader: Uint) {
     unsafe { sys::glAttachShader(program, shader) }
 }
+
+pub fn link_program(program: Uint) {
+    unsafe { sys::glLinkProgram(program) }
+}
