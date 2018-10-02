@@ -116,3 +116,9 @@ pub fn attach_shader(program: Uint, shader: Uint) {
 pub fn link_program(program: Uint) {
     unsafe { sys::glLinkProgram(program) }
 }
+
+pub fn get_programiv(program: Uint, pname: Enum) -> Int {
+    let mut params = 0;
+    unsafe { sys::glGetProgramiv(program, pname, &mut params) };
+    params
+}
