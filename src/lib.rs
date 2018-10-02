@@ -29,6 +29,7 @@ pub const VERTEX_SHADER: Enum = sys::GL_VERTEX_SHADER;
 pub const FRAGMENT_SHADER: Enum = sys::GL_FRAGMENT_SHADER;
 pub const COMPILE_STATUS: Enum = sys::GL_COMPILE_STATUS;
 pub const TRUE: Enum = sys::GL_TRUE;
+pub const LINK_STATUS: Enum = sys::GL_LINK_STATUS;
 
 // Functions
 pub fn clear_color(red: Clampf, green: Clampf, blue: Clampf, alpha: Clampf) {
@@ -121,4 +122,20 @@ pub fn get_programiv(program: Uint, pname: Enum) -> Int {
     let mut params = 0;
     unsafe { sys::glGetProgramiv(program, pname, &mut params) };
     params
+}
+
+pub fn get_program_info_log(program: Uint) -> String {
+    let max_length = 2048;
+    let mut length = 0;
+    let mut infolog: Char = 0;
+    let result;
+
+    unsafe {
+        sys::glGetProgramInfoLog(program, max_length, &mut length, &mut infolog);
+
+        let mut ptr = infolog as u8;
+        result = String::from_raw_parts(&mut ptr, length as usize, length as usize);
+    }
+
+    result
 }
