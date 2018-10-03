@@ -168,3 +168,7 @@ pub fn bind_buffer(target: Enum, buffer: Uint) {
 pub fn buffer_data(target: Enum, size: Sizeiptr, data: *const Void, usage: Enum) {
     unsafe { sys::glBufferData(target, size, data, usage) };
 }
+
+pub fn enable_vertex_attrib_array(index: Uint) {
+    unsafe { sys::glEnableVertexAttribArray(index) };
+}
