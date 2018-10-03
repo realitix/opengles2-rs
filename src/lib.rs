@@ -21,6 +21,7 @@ pub type Enum = sys::GLenum;
 pub type Void = sys::GLvoid;
 pub type Uint = sys::GLuint;
 pub type Char = sys::GLchar;
+pub type Boolean = sys::GLboolean;
 
 // Constant
 pub const COLOR_BUFFER_BIT: Bitfield = sys::GL_COLOR_BUFFER_BIT;
@@ -171,4 +172,8 @@ pub fn buffer_data(target: Enum, size: Sizeiptr, data: *const Void, usage: Enum)
 
 pub fn enable_vertex_attrib_array(index: Uint) {
     unsafe { sys::glEnableVertexAttribArray(index) };
+}
+
+pub fn vertex_attrib_pointer(index: Uint, size: Int, _type: Enum, normalized: Boolean, stride: Sizei, pointer: *const Void) {
+    unsafe { sys::glVertexAttribPointer(index, size, _type, normalized, stride, pointer) };
 }
