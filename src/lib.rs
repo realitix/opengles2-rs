@@ -159,3 +159,7 @@ pub fn gen_buffers(n: Sizei) -> Vec<Uint> {
     }
     buffers
 }
+
+pub fn bind_buffer(target: Enum, buffer: Uint) {
+    unsafe { sys::glBindBuffer(target, buffer) };
+}
