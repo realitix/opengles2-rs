@@ -16,6 +16,7 @@ pub type Clampf = sys::GLclampf;
 pub type Bitfield = sys::GLbitfield;
 pub type Int = sys::GLint;
 pub type Sizei = sys::GLsizei;
+pub type Sizeiptr = sys::GLsizeiptr;
 pub type Enum = sys::GLenum;
 pub type Void = sys::GLvoid;
 pub type Uint = sys::GLuint;
@@ -162,4 +163,8 @@ pub fn gen_buffers(n: Sizei) -> Vec<Uint> {
 
 pub fn bind_buffer(target: Enum, buffer: Uint) {
     unsafe { sys::glBindBuffer(target, buffer) };
+}
+
+pub fn buffer_data(target: Enum, size: Sizeiptr, data: *const Void, usage: Enum) {
+    unsafe { sys::glBufferData(target, size, data, usage) };
 }
