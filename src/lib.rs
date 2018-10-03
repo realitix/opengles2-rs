@@ -151,3 +151,11 @@ pub fn get_attrib_location(program: Uint, name: &str) -> Int {
 pub fn get_uniform_location(program: Uint, name: &str) -> Int {
     unsafe { sys::glGetUniformLocation(program, name.as_bytes().as_ptr() as *const i8) }
 }
+
+pub fn gen_buffers(n: Sizei) -> Vec<Uint> {
+    let mut buffers = Vec::with_capacity(2);
+    unsafe {
+        sys::glGenBuffers(n, buffers.as_mut_slice().as_mut_ptr());
+    }
+    buffers
+}
