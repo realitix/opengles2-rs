@@ -32,6 +32,10 @@ pub const FRAGMENT_SHADER: Enum = sys::GL_FRAGMENT_SHADER;
 pub const COMPILE_STATUS: Enum = sys::GL_COMPILE_STATUS;
 pub const TRUE: Enum = sys::GL_TRUE;
 pub const LINK_STATUS: Enum = sys::GL_LINK_STATUS;
+pub const ARRAY_BUFFER: Enum = sys::GL_ARRAY_BUFFER;
+pub const STATIC_DRAW: Enum = sys::GL_STATIC_DRAW;
+pub const FLOAT: Enum = sys::GL_FLOAT;
+pub const FALSE: Enum = sys::GL_FALSE;
 
 // Functions
 pub fn clear_color(red: Clampf, green: Clampf, blue: Clampf, alpha: Clampf) {
@@ -176,4 +180,8 @@ pub fn enable_vertex_attrib_array(index: Uint) {
 
 pub fn vertex_attrib_pointer(index: Uint, size: Int, _type: Enum, normalized: Boolean, stride: Sizei, pointer: *const Void) {
     unsafe { sys::glVertexAttribPointer(index, size, _type, normalized, stride, pointer) };
+}
+
+pub fn use_program(program: Uint) {
+    unsafe { sys::glUseProgram(program) };
 }
