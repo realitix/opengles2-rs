@@ -36,6 +36,7 @@ pub const ARRAY_BUFFER: Enum = sys::GL_ARRAY_BUFFER;
 pub const STATIC_DRAW: Enum = sys::GL_STATIC_DRAW;
 pub const FLOAT: Enum = sys::GL_FLOAT;
 pub const FALSE: Enum = sys::GL_FALSE;
+pub const TRIANGLES: Enum = sys::GL_TRIANGLES;
 
 // Functions
 pub fn clear_color(red: Clampf, green: Clampf, blue: Clampf, alpha: Clampf) {
@@ -184,4 +185,8 @@ pub fn vertex_attrib_pointer(index: Uint, size: Int, _type: Enum, normalized: Bo
 
 pub fn use_program(program: Uint) {
     unsafe { sys::glUseProgram(program) };
+}
+
+pub fn draw_arrays(mode: Enum, first: Int, count: Sizei) {
+    unsafe { sys::glDrawArrays(mode, first, count) };
 }
