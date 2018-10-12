@@ -5,6 +5,7 @@
 extern crate libc;
 
 use std::os::raw::c_void;
+use std::ffi::CString;
 
 pub mod sys {
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
@@ -152,7 +153,8 @@ pub fn delete_program(program: Uint) {
 }
 
 pub fn get_attrib_location(program: Uint, name: &str) -> Int {
-    unsafe { sys::glGetAttribLocation(program, name.as_bytes().as_ptr() as *const i8) }
+    let cname = CString::new(name).unwrap();
+    unsafe { sys::glGetAttribLocation(program, cname.as_bytes().as_ptr() as *const i8) }
 }
 
 pub fn get_uniform_location(program: Uint, name: &str) -> Int {
@@ -160,9 +162,10 @@ pub fn get_uniform_location(program: Uint, name: &str) -> Int {
 }
 
 pub fn gen_buffers(n: Sizei) -> Vec<Uint> {
-    let mut buffers = Vec::with_capacity(2);
+    let mut buffers = Vec::with_capacity(n as usize);
     unsafe {
         sys::glGenBuffers(n, buffers.as_mut_slice().as_mut_ptr());
+        buffers.set_len(n as usize);
     }
     buffers
 }
